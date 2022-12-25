@@ -8,7 +8,6 @@ import { resolveSRV } from './util/srvRecord';
 
 export function status(host: string, port = 25565, domain: string, options?: JavaStatusOptions): Promise<JavaStatusResponse> {
 	host = host.trim();
-	domain = (domain || host).trim();
 
 	assert(typeof host === 'string', `Expected 'host' to be a 'string', got '${typeof host}'`);
 	assert(host.length > 1, `Expected 'host' to have a length greater than 0, got ${host.length}`);
@@ -56,7 +55,7 @@ export function status(host: string, port = 25565, domain: string, options?: Jav
 			{
 				socket.writeVarInt(0x00);
 				socket.writeVarInt(47);
-				socket.writeStringVarInt(domain);
+				socket.writeStringVarInt((domain || host).trim());
 				socket.writeUInt16BE(port);
 				socket.writeVarInt(1);
 				await socket.flush();
