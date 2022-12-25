@@ -6,7 +6,7 @@ import { JavaStatusOptions } from './types/JavaStatusOptions';
 import { JavaStatusResponse } from './types/JavaStatusResponse';
 import { resolveSRV } from './util/srvRecord';
 
-export function status(host: string, port = 25565, domain: string || undefined, options?: JavaStatusOptions): Promise<JavaStatusResponse> {
+export function status(host: string, port = 25565, domain: string, options?: JavaStatusOptions): Promise<JavaStatusResponse> {
 	host = host.trim();
 	domain = (domain || host).trim();
 
